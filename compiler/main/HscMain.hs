@@ -1289,6 +1289,9 @@ hscGenHardCode cgguts mod_summary = do
 
         ------------------  Code generation ------------------
 
+        case hscTarget dflags of
+          HscCil -> error "CIL not yet implemented"
+          _      -> return ()
         cmms <- {-# SCC "NewCodeGen" #-}
                          tryNewCodeGen hsc_env this_mod data_tycons
                              cost_centre_info

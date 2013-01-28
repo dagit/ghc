@@ -2090,6 +2090,7 @@ hscPostBackendPhase dflags _ hsc_lang =
         HscAsm | gopt Opt_SplitObjs dflags -> Splitter
                | otherwise                 -> As
         HscLlvm        -> LlvmOpt
+        HscCil         -> StopLn -- TODO: Eventually the .NET toolchain
         HscNothing     -> StopLn
         HscInterpreted -> StopLn
 
