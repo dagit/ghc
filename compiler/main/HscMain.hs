@@ -124,6 +124,7 @@ import CmmParse         ( parseCmmFile )
 import CmmBuildInfoTables
 import CmmPipeline
 import CmmInfo
+import CilCodeGen       ( cilCodeGen )
 import CodeOutput
 import NameEnv          ( emptyNameEnv )
 import NameSet          ( emptyNameSet )
@@ -1290,7 +1291,8 @@ hscGenHardCode cgguts mod_summary = do
         ------------------  Code generation ------------------
 
         case hscTarget dflags of
-          HscCil -> error "CIL not yet implemented"
+          HscCil -> cilCodeGen hsc_env this_mod data_tycons
+                        cost_centre_info stg_binds hpc_info
           _      -> return ()
         cmms <- {-# SCC "NewCodeGen" #-}
                          tryNewCodeGen hsc_env this_mod data_tycons
